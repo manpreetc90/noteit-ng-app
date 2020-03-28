@@ -2,7 +2,7 @@
 	<div class="row">
     <div class="offset-3"></div>
     <div class="col-md-6">
-      <form name="form" #f="ngForm" novalidate class="feedback-form">
+      <form name="form" #f="ngForm" (submit)="sendFeedback()" novalidate class="feedback-form">
         <!-- Name -->
         <div class="form-group">
           <label for="name">First Name</label>
@@ -10,6 +10,7 @@
                  id="name"
                  class="form-control"
                  name="name"
+                 [(ngModel)]="model.name"
                  placeholder="Your name"/>
 		</div>
 
@@ -20,6 +21,7 @@
                  id="email"
                  class="form-control"
                  name="email"
+                 [(ngModel)]="model.email"
                  placeholder="Your email"/>
         </div>
 
@@ -31,6 +33,7 @@
             class="form-control"
             name="feedback"
             placeholder="Your feedback"
+            [(ngModel)]="model.feedback"
             rows="10">
       </textarea>
       </div>

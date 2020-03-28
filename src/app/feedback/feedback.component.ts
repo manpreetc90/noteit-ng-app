@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackComponent implements OnInit {
 
+  model: FeedbackViewModel = {
+    name: '',
+    email: '',
+    feedback: ''
+  }
   constructor() { }
+
+  sendFeedback() :void {
+    alert(this.model.name);
+  }
 
   ngOnInit(): void {
   }
+}
 
+export interface FeedbackViewModel{
+  name: String;
+  email: String;
+  feedback: String;
 }
