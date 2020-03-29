@@ -9,6 +9,7 @@ import { NotesComponent } from './notes/notes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {Router, Routes, RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import { HttpClientModule, HttpClient} from "@angular/common/http";
 
 const appRoutes: Routes = [
     {
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: true})
+    RouterModule.forRoot(appRoutes, {enableTracing: true}),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
