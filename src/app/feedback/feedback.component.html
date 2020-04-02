@@ -2,7 +2,7 @@
 	<div class="row">
     <div class="offset-3"></div>
     <div class="col-md-6">
-      <form name="form" #f="ngForm" (submit)="sendFeedback()" novalidate class="feedback-form">
+      <form name="form" #f="ngForm" (submit)=" f.form.valid && sendFeedback()" novalidate class="feedback-form">
         <!-- Name -->
         <div class="form-group">
           <label for="name">First Name</label>
@@ -10,8 +10,16 @@
                  id="name"
                  class="form-control"
                  name="name"
+                 #name="ngModel"
+                 [ngClass]="{ 'is-invalid':f.submitted && name.invalid }"
+                 required
                  [(ngModel)]="model.name"
                  placeholder="Your name"/>
+            <!-- input validation group-->
+            <div  *ngIf="f.submitted && name.invalid" class="invalid-input">
+              <!-- individual validation error-->
+              <div *ngIf="name.errors?.required">Field is required</div>
+            </div>
 		</div>
 
         <!-- Email -->
@@ -22,7 +30,14 @@
                  class="form-control"
                  name="email"
                  [(ngModel)]="model.email"
+                 #email="ngModel"
+                 [ngClass]="{ 'is-invalid':f.submitted && email.invalid}"
+                 required email
                  placeholder="Your email"/>
+            <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+              <div *ngIf="email.errors?.required">Field is required</div>
+              <div *ngIf="email.errors?.email">Field is not a valid email</div>
+            </div>
         </div>
 
         <!-- Feedback -->
@@ -34,8 +49,16 @@
             name="feedback"
             placeholder="Your feedback"
             [(ngModel)]="model.feedback"
+            #feedback="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && feedback.invalid}"
+            required
+            minlength="10"
             rows="10">
       </textarea>
+      <div *ngIf="f.submitted && feedback.invalid" class="invalid-input">
+        <div *ngIf="feedback.errors?.required">Field is required</div>
+        <div *ngIf="feedback.errors?.minlength">Minimum length must be 10 characters</div>
+      </div>
       </div>
 
 
