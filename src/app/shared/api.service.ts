@@ -13,6 +13,7 @@ export class ApiService {
   private ALL_NOTEBOOKS_URL = this.BASE_URL + '/notebooks/all';
   private  SEND_FEEDBACK_URL = this.BASE_URL + '/feedback';
   private  SAVE_UPDATE_NOTEBOOKS = this.BASE_URL + '/notebooks/save';
+  private  DELETE_NOTEBOOK_URL = this.BASE_URL + '/notebooks/delete';
 
   constructor(private http: HttpClient) {
 
@@ -28,6 +29,10 @@ export class ApiService {
 
   postNotebook(notebook: Notebook): Observable<Notebook>{
     return this.http.post<Notebook>(this.SAVE_UPDATE_NOTEBOOKS, notebook);
+  }
+
+  deleteNotebook(id: string): Observable<any>{
+    return this.http.delete(this.DELETE_NOTEBOOK_URL+ "/"+ id);
   }
 
 }
