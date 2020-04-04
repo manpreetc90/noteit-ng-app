@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { error } from '@angular/compiler/src/util';
 import { Notebook } from './model/notebook';
 import { ApiService } from '../shared/api.service';
+import { Note } from './model/note';
 
 @Component({
   selector: 'app-notes',
@@ -12,11 +13,12 @@ import { ApiService } from '../shared/api.service';
 export class NotesComponent implements OnInit {
 
   notebooks: Notebook[] = [];
-
+  notes: Note[] = [];
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.getAllNotebooks();
+    this.getAllNotes();
   }
 
   getAllNotebooks(){
@@ -28,7 +30,20 @@ export class NotesComponent implements OnInit {
         alert("Error occured while getting notebooks");
       }
     );
+  }
 
+  getNotesByNotebook(){
+
+  }
+  getAllNotes(){
+    this.apiService.getAllNotes().subscribe(
+      res => {
+        this.notes= res;
+      },
+      err => {
+        alert("An error occurred while getting notes");
+      }
+    );
   }
 
   createNotebook(){
